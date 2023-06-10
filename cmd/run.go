@@ -1,16 +1,19 @@
 package cmd
 
 import (
+	"errors"
 	"fmt"
 	"os"
 	"unicode"
 
+	"github.com/joho/godotenv"
 	"github.com/spf13/cobra"
 )
 
 const (
-	appName = "go-chatgpt-twitter-bot"
-	version = "0.0.1"
+	appName               = "go-chatgpt-twitter-bot"
+	version               = "0.0.1"
+	twitterBearerTokenEnv = "TWITTER_BEARER_TOKEN"
 )
 
 // Stores configuration data.
@@ -18,7 +21,7 @@ var config Config
 
 // SearchCmd is the main command for Cobra.
 var RunCmd = &cobra.Command{
-	Use:   "go-chatgpt-twitter-bot",
+	Use:   "go-chatgpt-twitter-bot <handle>",
 	Short: "Twitter bot backed by ChatGPT",
 	Long:  `Twitter bot backed by ChatGPT.`,
 	Run: func(cmd *cobra.Command, args []string) {
@@ -33,6 +36,11 @@ func init() {
 	err := config.Load()
 	if err != nil {
 		bail(fmt.Errorf("failed to load configuration: %s", err))
+	}
+
+	err = godotenv.Load()
+	if err != nil {
+		bail(fmt.Errorf("Error loading .env file: %s", err))
 	}
 
 	prepareFlags()
@@ -84,6 +92,8 @@ func prepareFlags() {
 		&config.Verbose, "verbose", "v", config.Verbose, "verbose mode")
 	RunCmd.PersistentFlags().StringVarP(
 		&config.Completion, "completion", "", "", "completion script for bash, zsh, fish or powershell")
+	RunCmd.PersistentFlags().StringVarP(
+		&config.Handle, "handle", "", "", "bots twitter handle")
 }
 
 // Where all the work happens.
@@ -96,6 +106,22 @@ func performCommand(cmd *cobra.Command, args []string) error {
 	if config.Completion != "" {
 		completion(cmd, config.Completion)
 		return nil
+	}
+
+	if config.Handle == "" {
+		return errors.New("handle is required")
+	}
+
+	if len(args) != 0 {
+		// Don't return an error, help screen is more appropriate.
+		help := cmd.HelpFunc()
+		help(cmd, args)
+		return nil
+	}
+
+	bearerToken := os.Getenv(twitterBearerTokenEnv)
+	if bearerToken == "" {
+		return errors.New("TWITTER_BEARER_TOKEN env var is required")
 	}
 
 	return nil

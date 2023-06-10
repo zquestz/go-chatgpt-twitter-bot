@@ -14,6 +14,7 @@ type Config struct {
 	Completion     string `json:"completion"`
 	DisplayVersion bool   `json:"-"`
 	Verbose        bool   `json:"verbose,string"`
+	Handle         string `json:"handle"`
 }
 
 // Load reads the configuration from ~/.config/go-chatgpt-twitter-bot/config

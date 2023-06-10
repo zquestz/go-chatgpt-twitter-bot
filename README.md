@@ -12,6 +12,10 @@ make
 make install
 ```
 
+## Twitter Setup
+
+Make sure the env var `TWITTER_BEARER_TOKEN` is set. The Twitter v2 API is used. You can generate a Bearer Token within the developer dashboard. There is also support for `.env` files.
+
 ## Autocompletion
 
 Autocompletion is supported. To set up autocompletion:

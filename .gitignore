@@ -23,3 +23,6 @@ go.work
 # Package binaries
 pkg
 go-chatgpt-twitter-bot
+
+# .env file
+.env
