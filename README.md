@@ -62,6 +62,8 @@ For more information about UCL visit:
 
 The following keys are supported:
 
+* handle (twitter handle)
+* userid (twitter userid)
 * verbose (verbose mode)
 
 ## Contributors

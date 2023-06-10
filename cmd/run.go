@@ -8,6 +8,7 @@ import (
 
 	"github.com/joho/godotenv"
 	"github.com/spf13/cobra"
+	"github.com/zquestz/go-chatgpt-twitter-bot/bot"
 )
 
 const (
@@ -93,7 +94,9 @@ func prepareFlags() {
 	RunCmd.PersistentFlags().StringVarP(
 		&config.Completion, "completion", "", "", "completion script for bash, zsh, fish or powershell")
 	RunCmd.PersistentFlags().StringVarP(
-		&config.Handle, "handle", "", "", "bots twitter handle")
+		&config.Handle, "handle", "", "", "twitter handle")
+	RunCmd.PersistentFlags().StringVarP(
+		&config.UserID, "userid", "", "", "twitter userid")
 }
 
 // Where all the work happens.
@@ -112,6 +115,10 @@ func performCommand(cmd *cobra.Command, args []string) error {
 		return errors.New("handle is required")
 	}
 
+	if config.UserID == "" {
+		return errors.New("userid is required")
+	}
+
 	if len(args) != 0 {
 		// Don't return an error, help screen is more appropriate.
 		help := cmd.HelpFunc()
@@ -122,6 +129,11 @@ func performCommand(cmd *cobra.Command, args []string) error {
 	bearerToken := os.Getenv(twitterBearerTokenEnv)
 	if bearerToken == "" {
 		return errors.New("TWITTER_BEARER_TOKEN env var is required")
+	}
+
+	err := bot.Run(config.UserID, bearerToken)
+	if err != nil {
+		return err
 	}
 
 	return nil

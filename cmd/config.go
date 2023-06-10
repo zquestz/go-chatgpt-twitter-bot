@@ -15,6 +15,7 @@ type Config struct {
 	DisplayVersion bool   `json:"-"`
 	Verbose        bool   `json:"verbose,string"`
 	Handle         string `json:"handle"`
+	UserID         string `json:"userid"`
 }
 
 // Load reads the configuration from ~/.config/go-chatgpt-twitter-bot/config
