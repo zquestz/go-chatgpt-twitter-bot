@@ -8,9 +8,14 @@ import (
 	"github.com/g8rswimmer/go-twitter/v2"
 )
 
-func createTweet(client *twitter.Client, text string) error {
+func createTweet(client *twitter.Client, text string, debug bool) error {
 	req := twitter.CreateTweetRequest{
 		Text: text,
+	}
+
+	if debug {
+		fmt.Printf("Tweet: %s\n", req.Text)
+		return nil
 	}
 
 	tweetResponse, err := client.CreateTweet(context.Background(), req)

@@ -12,9 +12,15 @@ import (
 )
 
 const (
-	appName               = "go-chatgpt-twitter-bot"
-	version               = "0.0.1"
-	twitterBearerTokenEnv = "TWITTER_BEARER_TOKEN"
+	appName                      = "go-chatgpt-twitter-bot"
+	version                      = "0.0.1"
+	twitterBearerTokenEnv        = "TWITTER_BEARER_TOKEN"
+	twitterConsumerAPIKeyEnv     = "TWITTER_CONSUMER_API_KEY"
+	twitterConsumerSecretEnv     = "TWITTER_CONSUMER_SECRET"
+	twitterAccessTokenEnv        = "TWITTER_ACCESS_TOKEN"
+	twitterAccessSecretEnv       = "TWITTER_ACCESS_SECRET"
+	openaiApiKeyEnv              = "OPENAI_API_KEY"
+	openaiCharacterBackgroundEnv = "OPENAI_CHARACTER_BACKGROUND"
 )
 
 // Stores configuration data.
@@ -97,6 +103,8 @@ func prepareFlags() {
 		&config.Handle, "handle", "", "", "twitter handle")
 	RunCmd.PersistentFlags().StringVarP(
 		&config.UserID, "userid", "", "", "twitter userid")
+	RunCmd.PersistentFlags().BoolVarP(
+		&config.DryRun, "dryrun", "d", config.DryRun, "dryrun mode")
 }
 
 // Where all the work happens.
@@ -119,6 +127,11 @@ func performCommand(cmd *cobra.Command, args []string) error {
 		return errors.New("userid is required")
 	}
 
+	config.CharacterBackground = os.Getenv(openaiCharacterBackgroundEnv)
+	if config.CharacterBackground == "" {
+		return fmt.Errorf("character background is required. Env var %s can be set", openaiCharacterBackgroundEnv)
+	}
+
 	if len(args) != 0 {
 		// Don't return an error, help screen is more appropriate.
 		help := cmd.HelpFunc()
@@ -128,10 +141,46 @@ func performCommand(cmd *cobra.Command, args []string) error {
 
 	bearerToken := os.Getenv(twitterBearerTokenEnv)
 	if bearerToken == "" {
-		return errors.New("TWITTER_BEARER_TOKEN env var is required")
+		return fmt.Errorf("%s env var is required", twitterBearerTokenEnv)
 	}
 
-	err := bot.Run(config.UserID, bearerToken)
+	apiKey := os.Getenv(twitterConsumerAPIKeyEnv)
+	if apiKey == "" {
+		return fmt.Errorf("%s env var is required", twitterConsumerAPIKeyEnv)
+	}
+
+	apiSecret := os.Getenv(twitterConsumerSecretEnv)
+	if apiSecret == "" {
+		return fmt.Errorf("%s env var is required", twitterConsumerSecretEnv)
+	}
+
+	accessToken := os.Getenv(twitterAccessTokenEnv)
+	if accessToken == "" {
+		return fmt.Errorf("%s env var is required", twitterAccessTokenEnv)
+	}
+
+	accessSecret := os.Getenv(twitterAccessSecretEnv)
+	if accessSecret == "" {
+		return fmt.Errorf("%s env var is required", twitterAccessSecretEnv)
+	}
+
+	openaiApiKey := os.Getenv(openaiApiKeyEnv)
+	if openaiApiKey == "" {
+		return fmt.Errorf("%s env var is required", openaiApiKeyEnv)
+	}
+
+	err := bot.Run(
+		config.UserID,
+		config.Handle,
+		bearerToken,
+		apiKey,
+		apiSecret,
+		accessToken,
+		accessSecret,
+		openaiApiKey,
+		config.CharacterBackground,
+		config.DryRun,
+	)
 	if err != nil {
 		return err
 	}

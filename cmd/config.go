@@ -11,11 +11,13 @@ import (
 
 // Config stores all the application configuration.
 type Config struct {
-	Completion     string `json:"completion"`
-	DisplayVersion bool   `json:"-"`
-	Verbose        bool   `json:"verbose,string"`
-	Handle         string `json:"handle"`
-	UserID         string `json:"userid"`
+	Completion          string `json:"completion"`
+	DisplayVersion      bool   `json:"-"`
+	Verbose             bool   `json:"verbose,string"`
+	Handle              string `json:"handle"`
+	UserID              string `json:"userid"`
+	DryRun              bool   `json:"dryrun"`
+	CharacterBackground string `json:"character_background"`
 }
 
 // Load reads the configuration from ~/.config/go-chatgpt-twitter-bot/config

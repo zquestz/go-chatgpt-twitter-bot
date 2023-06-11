@@ -12,9 +12,21 @@ make
 make install
 ```
 
-## Twitter Setup
+## ENV Setup
 
-Make sure the env var `TWITTER_BEARER_TOKEN` is set. The Twitter v2 API is used. You can generate a Bearer Token within the developer dashboard. There is also support for `.env` files.
+There are quite a few API keys and ENV vars to setup. You can use a `.env` file if you want. We use the Twitter v2 API, and OpenAI.
+
+```
+TWITTER_BEARER_TOKEN=
+TWITTER_CONSUMER_API_KEY=
+TWITTER_CONSUMER_SECRET=
+TWITTER_ACCESS_TOKEN=
+TWITTER_ACCESS_SECRET=
+OPENAI_API_KEY=
+OPENAI_CHARACTER_BACKGROUND=
+```
+
+Make sure to setup a character background. This will be the personality that will post tweets!
 
 ## Autocompletion
 
@@ -62,9 +74,11 @@ For more information about UCL visit:
 
 The following keys are supported:
 
+* dryrun (don't post to twitter)
 * handle (twitter handle)
 * userid (twitter userid)
 * verbose (verbose mode)
+* character_background (bot personality)
 
 ## Contributors
 
