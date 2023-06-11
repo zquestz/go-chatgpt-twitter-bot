@@ -101,8 +101,6 @@ func prepareFlags() {
 	RunCmd.PersistentFlags().StringVarP(
 		&config.Completion, "completion", "", "", "completion script for bash, zsh, fish or powershell")
 	RunCmd.PersistentFlags().StringVarP(
-		&config.Handle, "handle", "", "", "twitter handle")
-	RunCmd.PersistentFlags().StringVarP(
 		&config.UserID, "userid", "", defaultTwitterUserID, "twitter userid")
 	RunCmd.PersistentFlags().BoolVarP(
 		&config.DryRun, "dryrun", "d", config.DryRun, "dryrun mode")
@@ -124,6 +122,10 @@ func performCommand(cmd *cobra.Command, args []string) error {
 		return nil
 	}
 
+	if len(args) == 1 {
+		config.Handle = args[0]
+	}
+
 	if config.Handle == "" {
 		return errors.New("handle is required")
 	}
@@ -133,7 +135,7 @@ func performCommand(cmd *cobra.Command, args []string) error {
 		return fmt.Errorf("character background is required. Env var %s can be set", openaiCharacterBackgroundEnv)
 	}
 
-	if len(args) != 0 {
+	if len(args) > 1 {
 		// Don't return an error, help screen is more appropriate.
 		help := cmd.HelpFunc()
 		help(cmd, args)
