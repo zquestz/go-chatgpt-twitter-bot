@@ -16,6 +16,7 @@ const (
 	Make sure the content is interesting and unique.
 	Your only job is to generate tweets.
 	Make sure all tweets are well formed and ready to post.
+	You will generate exactly one tweet.
 	`
 )
 
@@ -30,7 +31,7 @@ func generateChatGPTTweet(openaiApiKey, characterBackground, twitterHandle strin
 	resp, err := client.CreateChatCompletion(
 		context.Background(),
 		openai.ChatCompletionRequest{
-			Model: openai.GPT4,
+			Model: openai.GPT3Dot5Turbo,
 			Messages: []openai.ChatCompletionMessage{
 				{
 					Role:    openai.ChatMessageRoleSystem,
