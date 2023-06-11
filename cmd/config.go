@@ -19,6 +19,7 @@ type Config struct {
 	DryRun              bool   `json:"dryrun"`
 	CharacterBackground string `json:"character_background"`
 	Bot                 bool   `json:"bot"`
+	Prompt              string `json:"Prompt"`
 }
 
 // Load reads the configuration from ~/.config/go-chatgpt-twitter-bot/config

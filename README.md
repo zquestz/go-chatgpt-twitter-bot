@@ -95,6 +95,7 @@ The following keys are supported:
 * character_background (bot personality)
 * dryrun (don't post to twitter)
 * handle (twitter handle)
+* prompt (prompt for the generator)
 * userid (twitter userid)
 * verbose (verbose mode)
 

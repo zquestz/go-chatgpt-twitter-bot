@@ -107,6 +107,8 @@ func prepareFlags() {
 		&config.DryRun, "dryrun", "d", config.DryRun, "dryrun mode")
 	RunCmd.PersistentFlags().BoolVarP(
 		&config.Bot, "bot", "b", config.Bot, "launch in bot mode")
+	RunCmd.PersistentFlags().StringVarP(
+		&config.Prompt, "prompt", "p", "", "prompt for the generator")
 }
 
 // Where all the work happens.
@@ -181,6 +183,7 @@ func performCommand(cmd *cobra.Command, args []string) error {
 		accessSecret,
 		openaiApiKey,
 		config.CharacterBackground,
+		config.Prompt,
 		config.DryRun,
 		config.Bot,
 	)

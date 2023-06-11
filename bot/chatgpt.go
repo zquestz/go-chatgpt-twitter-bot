@@ -19,6 +19,7 @@ const (
 	You will generate exactly one tweet.
 	Do not use your twitter handle in the tweet.
 	`
+	defaultPrompt = "What's new? Provide an update for us!"
 )
 
 func systemRoleContent(handle, characterBackground string) string {
@@ -27,8 +28,13 @@ func systemRoleContent(handle, characterBackground string) string {
 	return content
 }
 
-func generateChatGPTTweet(openaiApiKey, characterBackground, twitterHandle string) (string, error) {
+func generateChatGPTTweet(openaiApiKey, characterBackground, twitterHandle, prompt string) (string, error) {
 	client := openai.NewClient(openaiApiKey)
+
+	if prompt == "" {
+		prompt = defaultPrompt
+	}
+
 	resp, err := client.CreateChatCompletion(
 		context.Background(),
 		openai.ChatCompletionRequest{
@@ -40,7 +46,7 @@ func generateChatGPTTweet(openaiApiKey, characterBackground, twitterHandle strin
 				},
 				{
 					Role:    openai.ChatMessageRoleUser,
-					Content: "Generate a tweet!",
+					Content: prompt,
 				},
 			},
 		},

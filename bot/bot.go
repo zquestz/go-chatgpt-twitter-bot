@@ -33,7 +33,7 @@ func createTwitterOAuthClient(consumerKey, consumerSecret, accessToken, accessSe
 	}
 }
 
-func Run(twitterUserID, twitterHandle, twitterBearerToken, twitterApiKey, twitterApiSecret, twitterAccessToken, twitterAccessSecret, openaiApiKey, openaiPrompt string, dryrun, bot bool) error {
+func Run(twitterUserID, twitterHandle, twitterBearerToken, twitterApiKey, twitterApiSecret, twitterAccessToken, twitterAccessSecret, openaiApiKey, characterBackground, prompt string, dryrun, bot bool) error {
 	// clientApp := createTwitterAppClient(twitterBearerToken)
 	clientOAuth := createTwitterOAuthClient(twitterApiKey, twitterApiSecret, twitterAccessToken, twitterAccessSecret)
 
@@ -46,7 +46,7 @@ func Run(twitterUserID, twitterHandle, twitterBearerToken, twitterApiKey, twitte
 		return nil
 	}
 
-	tweet, err := generateChatGPTTweet(openaiApiKey, openaiPrompt, twitterHandle)
+	tweet, err := generateChatGPTTweet(openaiApiKey, characterBackground, twitterHandle, prompt)
 	if err != nil {
 		return err
 	}
