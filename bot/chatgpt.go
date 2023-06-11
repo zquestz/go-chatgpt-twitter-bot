@@ -20,7 +20,7 @@ const (
 	The tweet should be 280 characters or less.
 	Do not use your twitter handle in the tweet.
 	`
-	defaultPrompt = "What's new? Provide an update for us!"
+	defaultPrompt = "Generate a tweet!"
 )
 
 func systemRoleContent(handle, characterBackground string) string {
