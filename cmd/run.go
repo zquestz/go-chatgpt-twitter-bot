@@ -21,6 +21,7 @@ const (
 	twitterAccessSecretEnv       = "TWITTER_ACCESS_SECRET"
 	openaiApiKeyEnv              = "OPENAI_API_KEY"
 	openaiCharacterBackgroundEnv = "OPENAI_CHARACTER_BACKGROUND"
+	defaultTwitterUserID         = "me"
 )
 
 // Stores configuration data.
@@ -102,7 +103,7 @@ func prepareFlags() {
 	RunCmd.PersistentFlags().StringVarP(
 		&config.Handle, "handle", "", "", "twitter handle")
 	RunCmd.PersistentFlags().StringVarP(
-		&config.UserID, "userid", "", "", "twitter userid")
+		&config.UserID, "userid", "", defaultTwitterUserID, "twitter userid")
 	RunCmd.PersistentFlags().BoolVarP(
 		&config.DryRun, "dryrun", "d", config.DryRun, "dryrun mode")
 	RunCmd.PersistentFlags().BoolVarP(
@@ -125,10 +126,6 @@ func performCommand(cmd *cobra.Command, args []string) error {
 
 	if config.Handle == "" {
 		return errors.New("handle is required")
-	}
-
-	if config.UserID == "" {
-		return errors.New("userid is required")
 	}
 
 	config.CharacterBackground = os.Getenv(openaiCharacterBackgroundEnv)

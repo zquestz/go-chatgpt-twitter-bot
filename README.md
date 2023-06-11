@@ -40,9 +40,11 @@ Flags:
   -d, --dryrun              dryrun mode
       --handle string       twitter handle
   -h, --help                help for go-chatgpt-twitter-bot
-      --userid string       twitter userid
+  -p, --prompt string       prompt for the generator
+      --userid string       twitter userid (default "me")
   -v, --verbose             verbose mode
       --version             display version
+
 ```
 
 ## Autocompletion
