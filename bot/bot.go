@@ -13,7 +13,7 @@ const (
 
 func createTwitterAppClient(token string) *twitter.Client {
 	return &twitter.Client{
-		Authorizer: authorize{
+		Authorizer: authorizer{
 			Token: token,
 		},
 		Client: http.DefaultClient,

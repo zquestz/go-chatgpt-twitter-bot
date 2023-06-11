@@ -5,15 +5,12 @@ import (
 	"net/http"
 )
 
-type authorize struct {
+type authorizer struct {
 	Token string
 }
 
-func (a authorize) Add(req *http.Request) {
-	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", a.Token))
+func (a authorizer) Add(req *http.Request) {
+	if a.Token != "" {
+		req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", a.Token))
+	}
 }
-
-type authorizer struct {
-}
-
-func (a *authorizer) Add(req *http.Request) {}
