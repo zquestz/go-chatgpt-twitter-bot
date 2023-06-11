@@ -14,7 +14,7 @@ func createTweet(client *twitter.Client, text string, debug bool) error {
 	}
 
 	if debug {
-		fmt.Printf("Tweet: %s\n", req.Text)
+		fmt.Printf("%s\n", req.Text)
 		return nil
 	}
 

@@ -91,10 +91,10 @@ For more information about UCL visit:
 
 The following keys are supported:
 
+* bot (launch in bot mode) - Unfinished
 * character_background (bot personality)
 * dryrun (don't post to twitter)
 * handle (twitter handle)
-* tweet (tweet to main account)
 * userid (twitter userid)
 * verbose (verbose mode)
 
