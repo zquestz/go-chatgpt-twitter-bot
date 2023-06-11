@@ -22,6 +22,7 @@ const (
 	openaiApiKeyEnv              = "OPENAI_API_KEY"
 	openaiCharacterBackgroundEnv = "OPENAI_CHARACTER_BACKGROUND"
 	defaultTwitterUserID         = "me"
+	defaultPrompt                = "Generate a tweet!"
 )
 
 // Stores configuration data.
@@ -107,7 +108,7 @@ func prepareFlags() {
 	RunCmd.PersistentFlags().BoolVarP(
 		&config.Bot, "bot", "b", config.Bot, "launch in bot mode")
 	RunCmd.PersistentFlags().StringVarP(
-		&config.Prompt, "prompt", "p", "", "prompt for the generator")
+		&config.Prompt, "prompt", "p", defaultPrompt, "prompt for the generator")
 }
 
 // Where all the work happens.

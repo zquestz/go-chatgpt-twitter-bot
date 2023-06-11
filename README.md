@@ -1,7 +1,8 @@
 [![License][License-Image]][License-URL] 
 
 # go-chatgpt-twitter-bot
-Twitter bot backed by ChatGPT
+
+Twitter bot backed by ChatGPT.
 
 ## Install
 
@@ -38,13 +39,11 @@ Flags:
   -b, --bot                 launch in bot mode
       --completion string   completion script for bash, zsh, fish or powershell
   -d, --dryrun              dryrun mode
-      --handle string       twitter handle
   -h, --help                help for go-chatgpt-twitter-bot
-  -p, --prompt string       prompt for the generator
+  -p, --prompt string       prompt for the generator (default "Generate a tweet!")
       --userid string       twitter userid (default "me")
   -v, --verbose             verbose mode
       --version             display version
-
 ```
 
 ## Autocompletion

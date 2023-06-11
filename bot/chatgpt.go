@@ -22,7 +22,6 @@ const (
 	A hashtag is a word that starts with #.
 	The tweet should only contain one hashtag.
 	`
-	defaultPrompt = "Generate a tweet!"
 )
 
 func systemRoleContent(handle, characterBackground string) string {
@@ -33,10 +32,6 @@ func systemRoleContent(handle, characterBackground string) string {
 
 func generateChatGPTTweet(openaiApiKey, characterBackground, twitterHandle, prompt string) (string, error) {
 	client := openai.NewClient(openaiApiKey)
-
-	if prompt == "" {
-		prompt = defaultPrompt
-	}
 
 	resp, err := client.CreateChatCompletion(
 		context.Background(),
