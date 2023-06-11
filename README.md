@@ -28,6 +28,23 @@ OPENAI_CHARACTER_BACKGROUND=
 
 Make sure to setup a character background. This will be the personality that will post tweets!
 
+## Usage
+
+```
+Usage:
+  go-chatgpt-twitter-bot <handle> [flags]
+
+Flags:
+      --completion string   completion script for bash, zsh, fish or powershell
+  -d, --dryrun              dryrun mode
+      --handle string       twitter handle
+  -h, --help                help for go-chatgpt-twitter-bot
+  -t, --tweet               tweet to main account
+      --userid string       twitter userid
+  -v, --verbose             verbose mode
+      --version             display version
+```
+
 ## Autocompletion
 
 Autocompletion is supported. To set up autocompletion:
@@ -74,11 +91,12 @@ For more information about UCL visit:
 
 The following keys are supported:
 
+* character_background (bot personality)
 * dryrun (don't post to twitter)
 * handle (twitter handle)
+* tweet (tweet to main account)
 * userid (twitter userid)
 * verbose (verbose mode)
-* character_background (bot personality)
 
 ## Contributors
 
