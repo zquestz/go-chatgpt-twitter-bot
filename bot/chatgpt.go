@@ -19,6 +19,8 @@ const (
 	Generate exactly one tweet.
 	The tweet should be 280 characters or less.
 	Do not use your twitter handle in the tweet.
+	A hashtag is a word that starts with #.
+	The tweet should only contain one hashtag.
 	`
 	defaultPrompt = "Generate a tweet!"
 )
