@@ -17,11 +17,12 @@ const (
 	Your only job is to generate tweets.
 	Make sure all tweets are well formed and ready to post.
 	You will generate exactly one tweet.
+	Do not use your twitter handle in the tweet.
 	`
 )
 
 func systemRoleContent(handle, characterBackground string) string {
-	content := promptPrepend + characterBackground + promptAppend + `Your handle on twitter is @` + handle + `.`
+	content := promptPrepend + characterBackground + promptAppend + `Your handle on twitter is @` + handle + `. Do not use @` + handle + ` in the tweet.`
 
 	return content
 }
@@ -31,7 +32,7 @@ func generateChatGPTTweet(openaiApiKey, characterBackground, twitterHandle strin
 	resp, err := client.CreateChatCompletion(
 		context.Background(),
 		openai.ChatCompletionRequest{
-			Model: openai.GPT3Dot5Turbo,
+			Model: openai.GPT4,
 			Messages: []openai.ChatCompletionMessage{
 				{
 					Role:    openai.ChatMessageRoleSystem,
