@@ -42,6 +42,8 @@ func Run(twitterUserID, twitterHandle, twitterBearerToken, twitterApiKey, twitte
 		if err != nil {
 			return err
 		}
+
+		return nil
 	}
 
 	tweet, err := generateChatGPTTweet(openaiApiKey, openaiPrompt, twitterHandle)
