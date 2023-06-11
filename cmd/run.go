@@ -106,7 +106,7 @@ func prepareFlags() {
 	RunCmd.PersistentFlags().BoolVarP(
 		&config.DryRun, "dryrun", "d", config.DryRun, "dryrun mode")
 	RunCmd.PersistentFlags().BoolVarP(
-		&config.Tweet, "tweet", "t", config.Tweet, "tweet to main account")
+		&config.Bot, "bot", "b", config.Bot, "launch in bot mode")
 }
 
 // Where all the work happens.
@@ -182,7 +182,7 @@ func performCommand(cmd *cobra.Command, args []string) error {
 		openaiApiKey,
 		config.CharacterBackground,
 		config.DryRun,
-		config.Tweet,
+		config.Bot,
 	)
 	if err != nil {
 		return err

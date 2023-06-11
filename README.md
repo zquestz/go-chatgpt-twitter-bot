@@ -35,11 +35,11 @@ Usage:
   go-chatgpt-twitter-bot <handle> [flags]
 
 Flags:
+  -b, --bot                 launch in bot mode
       --completion string   completion script for bash, zsh, fish or powershell
   -d, --dryrun              dryrun mode
       --handle string       twitter handle
   -h, --help                help for go-chatgpt-twitter-bot
-  -t, --tweet               tweet to main account
       --userid string       twitter userid
   -v, --verbose             verbose mode
       --version             display version

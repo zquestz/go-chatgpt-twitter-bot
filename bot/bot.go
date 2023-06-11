@@ -33,11 +33,11 @@ func createTwitterOAuthClient(consumerKey, consumerSecret, accessToken, accessSe
 	}
 }
 
-func Run(twitterUserID, twitterHandle, twitterBearerToken, twitterApiKey, twitterApiSecret, twitterAccessToken, twitterAccessSecret, openaiApiKey, openaiPrompt string, dryrun, singleTweet bool) error {
+func Run(twitterUserID, twitterHandle, twitterBearerToken, twitterApiKey, twitterApiSecret, twitterAccessToken, twitterAccessSecret, openaiApiKey, openaiPrompt string, dryrun, bot bool) error {
 	// clientApp := createTwitterAppClient(twitterBearerToken)
 	clientOAuth := createTwitterOAuthClient(twitterApiKey, twitterApiSecret, twitterAccessToken, twitterAccessSecret)
 
-	if !singleTweet {
+	if bot {
 		err := fetchMentionTimeline(clientOAuth, twitterUserID)
 		if err != nil {
 			return err
